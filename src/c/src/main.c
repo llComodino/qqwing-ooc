@@ -27,7 +27,7 @@ struct sudoku_board_t {
   void (*set_log_history)(self_t self, bool log_hist);
   void (*set_print_style)(self_t self, print_style_t ps);
   bool (*generate_puzzle)(self_t self);
-  bool (*generate_puzzle_symmetry)(symmetry_t symmetry);
+  bool (*generate_puzzle_symmetry)(self_t self, symmetry_t symmetry);
   int (*get_given_count)(self_t self);
   int (*get_single_count)(self_t self);
   int (*get_hidden_single_count)(self_t self);
@@ -249,7 +249,7 @@ main(int argc, char *argv[])
     bool have_puzzle = false;
     if (action == ACTION_GENERATE) {
       // Generate a puzzle
-      have_puzzle = ss->generate_puzzle_symmetry(symmetry);
+      have_puzzle = ss->generate_puzzle_symmetry(ss, symmetry);
       if (!have_puzzle && print_puzzle) {
         fprintf(stdout, "%s", "Could not generate puzzle.");
         if (print_style==CSV) {

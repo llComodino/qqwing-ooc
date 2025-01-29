@@ -117,7 +117,7 @@ main( int argc, char *argv[] )
     } else if ( !strcmp( argv[i],"--generate" )) {
       action = ACTION_GENERATE;
       print_puzzle = true;
-      if ( ( i + 1 < argc && argv[i+1][0] != '-' ) {
+      if ( ( i + 1 ) < argc && argv[i+1][0] != '-' ) {
         number_to_generate = atoi( argv[i+1] );
         if ( number_to_generate <= 0 ) {
           fprintf( stdout, "%s%s\n", "Bad number of puzzles to generate: ", argv[i+1] );

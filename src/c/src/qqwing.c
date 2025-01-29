@@ -4,7 +4,7 @@
 
 #include "qqwing.h"
 
-typedef sudoku_board_t *const restrict _self_t;
+typedef sudoku_board_t *const _self_t;
 
 bool reset( _self_t self );
 bool single_solve_move( _self_t self, int round );
@@ -84,9 +84,9 @@ struct sudoku_board_t {
   bool ( *handle_naked_pairs)(_self_t, int );
   int ( *count_possibilities)(_self_t, int );
   bool ( *are_possibilities_same)(_self_t, int, int );
-  void ( *add_history_item)(_self_t, log_item_t *restrict );
+  void ( *add_history_item)(_self_t, log_item_t *const );
   void ( *shuffle_random_arrays)(_self_t );
-  void ( *print)(_self_t, const int *const restrict );
+  void ( *print)(_self_t, const int *const );
   void ( *rollback_non_guesses)(_self_t );
   void ( *clear_puzzle)(_self_t );
   void ( *print_history)(_self_t, log_list_t* );

@@ -1,7 +1,7 @@
 SRC_DIR := src
 OBJ_DIR := target/obj
 TARGET_DIR := target
-EXECUTABLE := $(TARGET_DIR)/app
+EXECUTABLE := $(TARGET_DIR)/qqwing
 
 SRC_FILES := $(shell find $(SRC_DIR) -type f -name '*.c')
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_FILES))

@@ -52,38 +52,38 @@ struct _sudoku_board_t
 
   int last_solve_round;
 
-  bool (*reset) (struct _sudoku_board_t*);
-  bool (*single_solve_move) (struct _sudoku_board_t*, int);
-  bool (*only_possibility_for_cell) (struct _sudoku_board_t*, int);
-  bool (*only_value_in_row) (struct _sudoku_board_t*, int);
-  bool (*only_value_in_column) (struct _sudoku_board_t*, int);
-  bool (*only_value_in_section) (struct _sudoku_board_t*, int);
-  bool (*guess) (struct _sudoku_board_t*, int, int);
-  bool (*is_impossible) (struct _sudoku_board_t*);
-  void (*rollback_round) (struct _sudoku_board_t*, int);
-  bool (*pointing_row_reduction) (struct _sudoku_board_t*, int);
-  bool (*row_box_reduction) (struct _sudoku_board_t*, int);
-  bool (*col_box_reduction) (struct _sudoku_board_t*, int);
-  bool (*pointing_column_reduction) (struct _sudoku_board_t*, int);
-  bool (*hidden_pair_in_row) (struct _sudoku_board_t*, int);
-  bool (*hidden_pair_in_column) (struct _sudoku_board_t*, int);
-  bool (*hidden_pair_in_section) (struct _sudoku_board_t*, int);
-  void (*mark) (struct _sudoku_board_t*, int, int, int);
-  int (*find_position_with_fewest_possibilities) (struct _sudoku_board_t*);
-  bool (*handle_naked_pairs) (struct _sudoku_board_t*, int);
-  int (*count_possibilities) (struct _sudoku_board_t*, int);
-  bool (*are_possibilities_same) (struct _sudoku_board_t*, int, int);
-  void (*add_history_item) (struct _sudoku_board_t*, log_item_t *const);
-  void (*shuffle_random_arrays) (struct _sudoku_board_t*);
-  void (*print) (struct _sudoku_board_t*, const int *const);
-  void (*rollback_non_guesses) (struct _sudoku_board_t*);
-  void (*clear_puzzle) (struct _sudoku_board_t*);
-  void (*print_history) (struct _sudoku_board_t*, log_list_t *);
-  bool (*remove_possibilities_in_one_from_two) (struct _sudoku_board_t*, int,
+  bool (*reset) (struct _sudoku_board_t *);
+  bool (*single_solve_move) (struct _sudoku_board_t *, int);
+  bool (*only_possibility_for_cell) (struct _sudoku_board_t *, int);
+  bool (*only_value_in_row) (struct _sudoku_board_t *, int);
+  bool (*only_value_in_column) (struct _sudoku_board_t *, int);
+  bool (*only_value_in_section) (struct _sudoku_board_t *, int);
+  bool (*guess) (struct _sudoku_board_t *, int, int);
+  bool (*is_impossible) (struct _sudoku_board_t *);
+  void (*rollback_round) (struct _sudoku_board_t *, int);
+  bool (*pointing_row_reduction) (struct _sudoku_board_t *, int);
+  bool (*row_box_reduction) (struct _sudoku_board_t *, int);
+  bool (*col_box_reduction) (struct _sudoku_board_t *, int);
+  bool (*pointing_column_reduction) (struct _sudoku_board_t *, int);
+  bool (*hidden_pair_in_row) (struct _sudoku_board_t *, int);
+  bool (*hidden_pair_in_column) (struct _sudoku_board_t *, int);
+  bool (*hidden_pair_in_section) (struct _sudoku_board_t *, int);
+  void (*mark) (struct _sudoku_board_t *, int, int, int);
+  int (*find_position_with_fewest_possibilities) (struct _sudoku_board_t *);
+  bool (*handle_naked_pairs) (struct _sudoku_board_t *, int);
+  int (*count_possibilities) (struct _sudoku_board_t *, int);
+  bool (*are_possibilities_same) (struct _sudoku_board_t *, int, int);
+  void (*add_history_item) (struct _sudoku_board_t *, log_item_t *const);
+  void (*shuffle_random_arrays) (struct _sudoku_board_t *);
+  void (*print) (struct _sudoku_board_t *, const int *const);
+  void (*rollback_non_guesses) (struct _sudoku_board_t *);
+  void (*clear_puzzle) (struct _sudoku_board_t *);
+  void (*print_history) (struct _sudoku_board_t *, log_list_t *);
+  bool (*remove_possibilities_in_one_from_two) (struct _sudoku_board_t *, int,
                                                 int, int);
 };
 
-typedef struct _sudoku_board_t * _self_t;
+typedef struct _sudoku_board_t *_self_t;
 
 // public
 bool set_puzzle (self_t self, int *init_puzzle);
@@ -114,11 +114,11 @@ difficulty_t get_difficulty (self_t self);
 char *get_difficulty_as_string (self_t self);
 
 // private
-const int* _get_puzzle(_self_t self);
-bool _set_puzzle(_self_t self, int *init_puzzle);
-const int* _get_solution(_self_t self);
-int _get_single_count(_self_t self);
-int _get_hidden_single_count(_self_t self);
+const int *_get_puzzle (_self_t self);
+bool _set_puzzle (_self_t self, int *init_puzzle);
+const int *_get_solution (_self_t self);
+int _get_single_count (_self_t self);
+int _get_hidden_single_count (_self_t self);
 int _get_naked_pair_count (_self_t self);
 int _get_hidden_pair_count (_self_t self);
 int _get_pointing_pair_triple_count (_self_t self);
@@ -137,14 +137,14 @@ bool only_possibility_for_cell (_self_t self, int round);
 bool only_value_in_row (_self_t self, int round);
 bool only_value_in_column (_self_t self, int round);
 bool only_value_in_section (_self_t self, int round);
-int _get_given_count(_self_t self);
+int _get_given_count (_self_t self);
 bool solve (self_t self);
 bool _solve (_self_t);
 bool __solve (_self_t, int round);
 bool _has_unique_solution (_self_t self);
 int _count_solutions (_self_t self, bool limited);
 int __count_solutions (_self_t self, int round, bool limited);
-bool _is_solved(_self_t self);
+bool _is_solved (_self_t self);
 bool guess (_self_t self, int round, int guess_number);
 bool is_impossible (_self_t self);
 void _print_puzzle (_self_t self);
@@ -171,9 +171,12 @@ void print_history (_self_t self, log_list_t *hist);
 bool remove_possibilities_in_one_from_two (_self_t self, int pos_1, int pos_2,
                                            int round);
 log_list_t *new_log_list (void);
-void push (log_list_t *const restrict self, log_item_t *const restrict item);
-log_item_t pop (log_list_t *const restrict list);
-log_item_t *at (const log_list_t *const restrict list, size_t idx);
+void push (log_list_t *restrict self, log_item_t *const restrict item);
+log_item_t pop (log_list_t *restrict list);
+log_item_t *at (const log_list_t *const restrict list, const size_t idx);
+void _print_log_item (const log_item_t *const restrict self);
+int _get_log_round (const log_item_t *const restrict self);
+log_type_t _get_log_type (const log_item_t *const restrict self);
 
 char *
 get_version ()
@@ -344,7 +347,6 @@ new_sudoku_board (void)
   board->remove_possibilities_in_one_from_two
       = remove_possibilities_in_one_from_two;
 
-  sudoku_board_t* tmp = (sudoku_board_t *)board;
   return (sudoku_board_t *)board;
 }
 
@@ -356,7 +358,7 @@ new_sudoku_board (void)
 int
 get_given_count (self_t self)
 {
-  return _get_given_count((_self_t)self);
+  return _get_given_count ((_self_t)self);
 }
 
 int
@@ -378,7 +380,7 @@ _get_given_count (_self_t self)
 bool
 set_puzzle (self_t self, int *init_puzzle)
 {
-  return _set_puzzle( (_self_t)self, init_puzzle );
+  return _set_puzzle ((_self_t)self, init_puzzle);
 }
 
 bool
@@ -397,7 +399,7 @@ _set_puzzle (_self_t self, int *init_puzzle)
 const int *
 get_puzzle (self_t self)
 {
-  return _get_puzzle( (_self_t)self );
+  return _get_puzzle ((_self_t)self);
 }
 
 const int *
@@ -412,7 +414,7 @@ _get_puzzle (_self_t self)
 const int *
 get_solution (self_t self)
 {
-  return _get_solution( (_self_t)self );
+  return _get_solution ((_self_t)self);
 }
 
 const int *
@@ -443,16 +445,19 @@ reset (_self_t self)
       self->possibilities[i] = 0;
     }
 
-  log_list_node_t *tail = self->solve_history->tail;
-  while (tail != NULL)
+  while (self->solve_history->head != NULL)
     {
-      free (tail->next);
+      self->solve_history->pop (self->solve_history);
+    }
+  while (self->solve_instructions->head != NULL)
+    {
+      self->solve_instructions->pop (self->solve_instructions);
     }
   free (self->solve_history);
   free (self->solve_instructions);
 
-  self->solve_history = (log_list_t*)malloc(sizeof(log_list_node_t));
-  self->solve_instructions = (log_list_t*)malloc(sizeof(log_list_node_t));
+  self->solve_history = new_log_list ();
+  self->solve_instructions = new_log_list ();
 
   int round = 1;
   for (int position = 0; position < BOARD_SIZE; position++)
@@ -525,7 +530,7 @@ get_difficulty_as_string (self_t self)
 int
 get_single_count (self_t self)
 {
-  return _get_single_count( (_self_t)self );
+  return _get_single_count ((_self_t)self);
 }
 
 int
@@ -542,7 +547,7 @@ _get_single_count (_self_t self)
 int
 get_hidden_single_count (self_t self)
 {
-  return _get_hidden_single_count( (_self_t)self );
+  return _get_hidden_single_count ((_self_t)self);
 }
 
 int
@@ -560,7 +565,7 @@ _get_hidden_single_count (_self_t self)
 int
 get_naked_pair_count (self_t self)
 {
-  return _get_naked_pair_count( (_self_t)self );
+  return _get_naked_pair_count ((_self_t)self);
 }
 
 int
@@ -578,7 +583,7 @@ _get_naked_pair_count (_self_t self)
 int
 get_hidden_pair_count (self_t self)
 {
-  return _get_hidden_pair_count( (_self_t)self );
+  return _get_hidden_pair_count ((_self_t)self);
 }
 
 int
@@ -596,7 +601,7 @@ _get_hidden_pair_count (_self_t self)
 int
 get_pointing_pair_triple_count (self_t self)
 {
-  return _get_pointing_pair_triple_count( (_self_t)self );
+  return _get_pointing_pair_triple_count ((_self_t)self);
 }
 
 int
@@ -614,7 +619,7 @@ _get_pointing_pair_triple_count (_self_t self)
 int
 get_box_line_reduction_count (self_t self)
 {
-  return _get_box_line_reduction_count( (_self_t)self );
+  return _get_box_line_reduction_count ((_self_t)self);
 }
 
 int
@@ -630,7 +635,7 @@ _get_box_line_reduction_count (_self_t self)
 int
 get_guess_count (self_t self)
 {
-  return _get_guess_count( (_self_t)self );
+  return _get_guess_count ((_self_t)self);
 }
 
 int
@@ -646,7 +651,7 @@ _get_guess_count (_self_t self)
 int
 get_backtrack_count (self_t self)
 {
-  return _get_backtrack_count( (_self_t)self );
+  return _get_backtrack_count ((_self_t)self);
 }
 
 int
@@ -676,7 +681,7 @@ clear_puzzle (_self_t self)
 bool
 generate_puzzle_symmetry (self_t self, symmetry_t symmetry)
 {
-  return _generate_puzzle_symmetry( (_self_t)self, symmetry );
+  return _generate_puzzle_symmetry ((_self_t)self, symmetry);
 }
 
 bool
@@ -826,7 +831,7 @@ rollback_non_guesses (_self_t self)
 void
 set_print_style (self_t self, print_style_t ps)
 {
-  return _set_print_style( (_self_t)self, ps );
+  return _set_print_style ((_self_t)self, ps);
 }
 
 void
@@ -838,7 +843,7 @@ _set_print_style (_self_t self, print_style_t ps)
 void
 set_record_history (self_t self, bool rec_hist)
 {
-  return _set_record_history( (_self_t)self, rec_hist );
+  return _set_record_history ((_self_t)self, rec_hist);
 }
 
 void
@@ -850,7 +855,7 @@ _set_record_history (_self_t self, bool rec_hist)
 void
 set_log_history (self_t self, bool log_hist)
 {
-  return _set_log_history( (_self_t)self, log_hist );
+  return _set_log_history ((_self_t)self, log_hist);
 }
 
 void
@@ -881,6 +886,8 @@ add_history_item (_self_t self, log_item_t *restrict l)
 void
 print_history (_self_t self, log_list_t *list)
 {
+  void rec_print (_self_t, log_list_node_t*, int);
+
   if (!self->record_history)
     {
       fprintf (stdout, "%s", "History was not recorded.");
@@ -894,20 +901,8 @@ print_history (_self_t self, log_list_t *list)
         }
     }
 
-  log_list_node_t *head = list->head;
-  for (unsigned int i = 0; i < list->size; i++)
-    {
-      fprintf (stdout, "%d%s", i + 1, ". ");
-      head->item->print (head->item);
-      if (self->print_style == CSV)
-        {
-          fprintf (stdout, "%s", " -- ");
-        }
-      else
-        {
-          puts ("");
-        }
-    }
+  rec_print(self, list->head, 0);
+
   if (self->print_style == CSV)
     {
       fprintf (stdout, "%s", ",");
@@ -919,9 +914,29 @@ print_history (_self_t self, log_list_t *list)
 }
 
 void
+rec_print (_self_t self, log_list_node_t *node, int offset)
+{
+  if (node == NULL)
+    return;
+
+  fprintf (stdout, "%d%s", offset + 1, ". ");
+  node->item->print (node->item);
+  if (self->print_style == CSV)
+  {
+      fprintf (stdout, "%s", " -- ");
+  }
+  else
+  {
+      puts ("");
+  }
+
+  rec_print(self, node->next, offset + 1);
+}
+
+void
 print_solve_instructions (self_t self)
 {
-  return _print_solve_instructions( (_self_t)self );
+  return _print_solve_instructions ((_self_t)self);
 }
 
 void
@@ -941,7 +956,7 @@ _print_solve_instructions (_self_t self)
 void
 print_solve_history (self_t self)
 {
-  return _print_solve_history( (_self_t)self );
+  return _print_solve_history ((_self_t)self);
 }
 
 void
@@ -953,7 +968,7 @@ _print_solve_history (_self_t self)
 bool
 solve (self_t self)
 {
-  return _solve( (_self_t)self );
+  return _solve ((_self_t)self);
 }
 
 bool
@@ -998,7 +1013,7 @@ __solve (_self_t self, int round)
 bool
 has_unique_solution (self_t self)
 {
-  return _has_unique_solution( (_self_t)self );
+  return _has_unique_solution ((_self_t)self);
 }
 
 bool
@@ -1010,7 +1025,7 @@ _has_unique_solution (_self_t self)
 int
 count_solutions (self_t self, bool limit_to_two)
 {
-  return _count_solutions( (_self_t)self, limit_to_two );
+  return _count_solutions ((_self_t)self, limit_to_two);
 }
 
 int
@@ -1097,7 +1112,7 @@ rollback_round (_self_t self, int round)
 bool
 is_solved (self_t self)
 {
-  return _is_solved( (_self_t)self );
+  return _is_solved ((_self_t)self);
 }
 
 bool
@@ -2209,7 +2224,7 @@ print (_self_t self, const int *const restrict sudoku)
 void
 print_puzzle (self_t self)
 {
-  return _print_puzzle( (_self_t)self );
+  return _print_puzzle ((_self_t)self);
 }
 
 void
@@ -2221,7 +2236,7 @@ _print_puzzle (_self_t self)
 void
 print_solution (self_t self)
 {
-  return _print_solution( (_self_t)self );
+  return _print_solution ((_self_t)self);
 }
 
 void
@@ -2247,6 +2262,10 @@ new_std_log (int r, log_type_t t)
   item->value = 0;
   item->position = -1;
 
+  item->print = _print_log_item;
+  item->get_round = _get_log_round;
+  item->get_type = _get_log_type;
+
   return item;
 }
 
@@ -2267,11 +2286,15 @@ new_val_pos_log (int r, log_type_t t, int v, int p)
   item->value = v;
   item->position = p;
 
+  item->print = _print_log_item;
+  item->get_round = _get_log_round;
+  item->get_type = _get_log_type;
+
   return item;
 }
 
 int
-_get_round (const log_item_t *const restrict self)
+_get_log_round (const log_item_t *const restrict self)
 {
   return self->round;
 }
@@ -2280,7 +2303,7 @@ _get_round (const log_item_t *const restrict self)
  * Get the type of this log item.
  */
 log_type_t
-get_type (const log_item_t *const restrict self)
+_get_log_type (const log_item_t *const restrict self)
 {
   return self->type;
 }
@@ -2290,7 +2313,7 @@ get_type (const log_item_t *const restrict self)
  * determined by the type of log item.
  */
 void
-_print (const log_item_t *const restrict self)
+_print_log_item (const log_item_t *const restrict self)
 {
   fprintf (stdout, "%s%d%s", "Round: ", self->get_round (self), " - ");
   switch (self->get_type (self))
@@ -2434,7 +2457,7 @@ get_random_symmetry ()
 }
 
 void
-push (log_list_t *const restrict self, log_item_t *const restrict item)
+push (log_list_t *restrict self, log_item_t *const restrict item)
 {
   if (self->head == NULL)
     {
@@ -2450,6 +2473,9 @@ push (log_list_t *const restrict self, log_item_t *const restrict item)
 
       self->head->item = item;
       self->head->next = NULL;
+      self->head->prev = NULL;
+
+      self->tail = self->head;
     }
   else
     {
@@ -2464,42 +2490,45 @@ push (log_list_t *const restrict self, log_item_t *const restrict item)
 
       self->tail->next->item = item;
       self->tail->next->next = NULL;
+      self->tail->next->prev = self->tail;
+
+      self->tail = self->tail->next;
     }
 
   return;
 }
 
 log_item_t
-pop (log_list_t *const restrict list)
+pop (log_list_t *restrict list)
 {
-  log_list_node_t *head = list->head;
+  log_list_node_t *tail = list->tail;
 
-  if (head == NULL)
+  if (tail == NULL)
     {
       fprintf (stderr, "%s\n", "Tried to pop empty list");
       exit (4);
     }
 
+  log_list_node_t *ref = tail->prev;
   log_item_t tmp = { 0 };
-  if (head->next == NULL)
+  if (ref == NULL)
     {
-      tmp = *(head->item);
-      free (head);
+      tmp = *(tail->item);
+      free (list->head);
+      list->head = NULL;
       list->tail = NULL;
     }
   else
     {
-      for (; head->next->next != NULL; head = head->next)
-        ;
-      tmp = *(head->next->item);
-      free (head->next);
-      list->tail = head;
+      tmp = *(list->tail->item);
+      free (list->tail);
+      list->tail = ref;
     }
   return tmp;
 }
 
 log_item_t *
-at (const log_list_t *const restrict list, size_t idx)
+at (const log_list_t *const restrict list, const size_t idx)
 {
   if (idx > list->size)
     {

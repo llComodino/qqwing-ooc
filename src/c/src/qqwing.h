@@ -105,7 +105,7 @@ typedef struct log_list_t {
 
   size_t size;
 
-  void (*push)(struct log_list_t *const, log_item_t *const);
-  log_item_t (*pop)(struct log_list_t *const);
-  log_item_t* (*at)(const struct log_list_t *const , size_t);
+  void (*push)(struct log_list_t *, log_item_t *const);
+  log_item_t (*pop)(struct log_list_t *);
+  log_item_t* (*at)(const struct log_list_t *const , const size_t);
 } log_list_t;

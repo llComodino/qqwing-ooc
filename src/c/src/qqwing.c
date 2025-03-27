@@ -243,7 +243,6 @@ new_log_list (void)
 
   list->head = NULL;
   list->tail = NULL;
-  list->size = 0;
 
   list->push = push;
   list->pop = pop;
@@ -875,7 +874,7 @@ add_history_item (_self_t self, log_item_t *restrict l)
   if (self->record_history)
     {
       self->solve_history->push (self->solve_history, l);
-      self->solve_instructions->push (self->solve_history, l);
+      self->solve_instructions->push (self->solve_instructions, l);
     }
   else
     {
@@ -886,7 +885,7 @@ add_history_item (_self_t self, log_item_t *restrict l)
 void
 print_history (_self_t self, log_list_t *list)
 {
-  void rec_print (_self_t, log_list_node_t*, int);
+  void rec_print (_self_t, log_list_node_t *, int);
 
   if (!self->record_history)
     {
@@ -901,7 +900,7 @@ print_history (_self_t self, log_list_t *list)
         }
     }
 
-  rec_print(self, list->head, 0);
+  rec_print (self, list->head, 0);
 
   if (self->print_style == CSV)
     {
@@ -922,15 +921,15 @@ rec_print (_self_t self, log_list_node_t *node, int offset)
   fprintf (stdout, "%d%s", offset + 1, ". ");
   node->item->print (node->item);
   if (self->print_style == CSV)
-  {
+    {
       fprintf (stdout, "%s", " -- ");
-  }
+    }
   else
-  {
+    {
       puts ("");
-  }
+    }
 
-  rec_print(self, node->next, offset + 1);
+  rec_print (self, node->next, offset + 1);
 }
 
 void
@@ -1101,11 +1100,12 @@ rollback_round (_self_t self, int round)
         }
     }
 
-  log_list_t *s_ins = self->solve_instructions;
-  while (s_ins->size > 0
-         && s_ins->tail->item->get_round (s_ins->tail->item) == round)
+  log_list_node_t *tail = self->solve_instructions->tail;
+  while (tail != NULL && tail->item->get_round (tail->item) == round)
     {
+      log_list_node_t *tmp = tail->prev;
       self->solve_instructions->pop (self->solve_instructions);
+      tail = tmp;
     }
 }
 
@@ -2415,9 +2415,10 @@ int
 get_log_count (const log_list_t *const restrict list, log_type_t type)
 {
   unsigned int count = 0;
-  for (unsigned int i = 0; i < list->size; i++)
+  log_list_node_t *head = list->head;
+  for (unsigned int i = 0; head != NULL; i++, head = head->next)
     {
-      if (list->at (list, i)->get_type (list->at (list, i)) == type)
+      if (list->at (list, i)->type == type)
         count++;
     }
   return count;
@@ -2530,15 +2531,13 @@ pop (log_list_t *restrict list)
 log_item_t *
 at (const log_list_t *const restrict list, const size_t idx)
 {
-  if (idx > list->size)
-    {
-      fprintf (stderr, "%s\n", "idx out of bounds (list->at())");
-      exit (5);
-    }
-
   log_list_node_t *head = list->head;
   for (size_t i = 0; i < idx; i++, head = head->next)
-    ;
+    if (head == NULL)
+      {
+        fprintf (stderr, "Error: idx out of bounds\n");
+        exit (2);
+      }
 
   return head->item;
 }

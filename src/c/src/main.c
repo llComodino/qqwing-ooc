@@ -459,7 +459,6 @@ main (int argc, char *argv[])
       // Check have_puzzle again, it may have changed based on difficulty
       if (have_puzzle)
         {
-
           // With a puzzle now in hand and possibly solved
           // print out the solution, stats, etc.
           printed_something = true;
